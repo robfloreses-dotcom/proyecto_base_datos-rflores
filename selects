@@ -1,40 +1,8 @@
-INSERT INTO rflores.categoria (nombre)
-VALUES ('Bebidas'), ('Snacks'), ('Limpieza'), ('Electrónica'), ('Ropa');
-INSERT INTO rflores.producto (nombre, precio, id_categoria)
-
 SELECT
   'Producto ' || g,
   (random() * 50 + 1)::DECIMAL(10,2),
   (random() * 4 + 1)::INT
 FROM generate_series(1,25) g;
-
-INSERT INTO rflores.cliente (nombre, email, telefono)
-SELECT
-  'Cliente ' || g,
-  'cliente' || g || '@mail.com',
-  '099000' || g
-FROM generate_series(1,30) g;
-
-INSERT INTO rflores.venta (id_cliente, fecha_venta, total)
-SELECT
-  (random() * 29 + 1)::INT,
-  DATE '2024-01-01' + (random() * 90)::INT,
-  0
-FROM generate_series(1,30);
-
-INSERT INTO rflores.detalle_venta
-(id_venta, id_producto, cantidad, precio_unitario, subtotal)
-SELECT
-  v.id_venta,
-  p.id_producto,
-  (random() * 5 + 1)::INT AS cantidad,
-  p.precio AS precio_unitario,
-  ((random() * 5 + 1)::INT * p.precio) AS subtotal
-FROM generate_series(1,100)
-JOIN rflores.venta v ON true
-JOIN rflores.producto p ON true
-ORDER BY random()
-LIMIT 100;
 
 SELECT DISTINCT c.nombre, v.fecha_venta
 FROM rflores.cliente c
