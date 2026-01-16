@@ -6,5 +6,6 @@ INSERT INTO rflores.cliente (nombre, email, telefono)
 
 INSERT INTO rflores.venta (id_cliente, fecha_venta, total)
 
-INSERT INTO rflores.detalle_venta
+INSERT INTO rflores.detalle_venta (id_venta, id_producto, cantidad, precio_unitario, subtotal)
+
 
